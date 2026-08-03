@@ -143,7 +143,7 @@ sich mit dem Pinsel nachbessern lässt.
 
 ## Lizenzen
 
-**Der Code** steht unter Custom License. Nutzungsrechte unter `LICENSE` beachten.
+**Der Code** steht unter Custom License Nutzungsrechte. Diese unter `LICENSE` beachten.
 
 **Die zehn Schriften** stehen unter SIL Open Font License oder Apache 2.0: mit den Ergebnissen
 darf verkauft werden, nur die Schriftdatei selbst nicht weiterverkauft.
@@ -155,56 +155,115 @@ und Freigestellt nutzen kein Modell und sind davon unberührt. Dies ist keine Re
 
 ---
 
-## Technik in Kürze
-
-Reines HTML, CSS und JavaScript, kein Build-Schritt, keine Abhängigkeiten zur Laufzeit außer
-dem KI-Modell. Die Bildverarbeitung läuft auf 2D-Canvas.
-
-Der Kern ist **maskengetrieben**: alles hängt an einer einzigen Graustufen-Maske. Woher sie
-kommt — Erkennung, Pfad, Rechteck, PNG-Alpha oder Pinsel — ist allem Nachgelagerten egal. Rand,
-Gebrauchsspuren, Holo, Text und Export lesen nur diese Maske. Eine neue Formquelle liefert eine
-Maske und fasst die Pipeline nicht an.
-
-Ausführlich in [`docs/HANDOFF.md`](docs/HANDOFF.md): Architektur, sämtliche Entscheidungen mit
-Begründung, bekannte Grenzen und der Weg zu einer mobilen Umsetzung.
-
----
-
-## Was liegt wo
-
-| Datei | Inhalt |
-| --- | --- |
-| `Sticker Maker.html` | **die App** — eine Datei, alles enthalten, läuft per Doppelklick |
-| `index.html` | identische Kopie, damit GitHub Pages die App direkt ausliefert |
-| `src/Sticker Maker.dc.html` | der Quelltext, aus dem die Einzeldatei gebaut wird |
-| `src/fonts.css` | die zehn Schriften als eingebettete `data:`-WOFF2 |
-| `docs/HANDOFF.md` | vollständiges Protokoll: Quellen, Architektur, Entscheidungstabelle, bekannte Grenzen, Weg zur mobilen App |
-| `docs/Projektgedaechtnis.md` | Kurzfassung der verbindlichen Konventionen (im Arbeitsprojekt als `CLAUDE.md`) |
-| `docs/Fehlerbericht Playlist Designer.md` | zwei Dunkelmodus-Fehler in der Partner-App, mit Zeilenangaben und Lösung |
-| `LICENSE` | MIT für den Code, plus die Hinweise zu Schriften und Modell |
-
-**Vor dem ersten Push:** in `LICENSE` `<DEIN NAME>` ersetzen.
-
-`Sticker Maker.html` und `index.html` sind bewusst identisch und werden gemeinsam aus
-`src/` neu gebaut — wer eine ändert, muss beide ersetzen.
-
----
-
 ## English
 
-Turns any image into a print-ready sticker as a transparent PNG — cut-out, border, wear, holo
-finish and text. **Runs entirely in your browser**, as a single HTML file: no account, no
-upload, no server, images never leave the device. The interface switches between German and
-English, and has a dark mode.
+# Sticker Maker
 
-Four independent ways to get a shape: crop a full-bleed rectangle, click a path by hand, let an
-in-browser AI model detect the subject, or take the alpha channel of an already cut-out PNG
-as-is. The transparent border behaves like real clear vinyl (milky haze, grime collecting at the
-outer edge), wear follows the border choice (white scratches vs. real holes), rainbow wash and
-every single flake or glitter grain take their colour from one shared colour field, gloss never
-sits on a scratch, and text ages along with the sticker unless you flip it on top.
+Turn an image into a print-ready sticker as a transparent PNG — background removal, border, wear & tear, holo finish, and text. **Runs entirely in your browser.** A single HTML file, no account, no upload, no server: images never leave your device.
 
-Download `Sticker Maker.html` and open it — everything except AI detection works offline.
-Model licence note above applies: RMBG 1.4 is non-commercial only; the other three modes use no
-model at all. Full engineering notes, decision log and known limits are in
-[`docs/HANDOFF.md`](docs/HANDOFF.md) (German).
+---
+
+## What makes this maker special
+
+**Four ways to shape — subject detection is optional.** Most tools force every image through subject recognition. Here, it is just one of four equal paths: crop full-area, click a path by hand, detect subject automatically, or import a pre-cut PNG as-is. If you've already done the prep work, all you need are the border and effects.
+
+**The transparent border looks like real clear foil.** "Transparent" here doesn't mean "invisible": *Milky* gives the clear area the slight haze of real foil, while *Dirty edge* adds uneven wear precisely to the outermost seam — right where dirt collects on a used sticker.
+
+**Wear and tear follows your border choice.** White border → white scratches. Transparent border → real holes through the foil. Not a painted-on filter, but the same physical logic as an actual sticker.
+
+**A single rainbow field for everything.** The pastel gradient and the color of every single shard or grain of glitter come from the **same** color field — neighbors share hue, and a sweep visibly runs across the sticker. Two independent random effects side-by-side look wrong; this doesn't.
+
+**Gloss doesn't sit on scratches.** A scratch is worn-away foil — the gloss is gone there. And for glitter, the rainbow and colored grains only carry the print, while the white die-cut border carries the same grain pattern clearly and desaturated: clear glitter over the foil.
+
+**Text that ages with the sticker.** By default, text sits **underneath** wear & tear and glitter, so it wears down alongside the sticker — it's part of the print, not an overlay. For headlines, there's an "On top" toggle.
+
+**Ten embedded fonts.** No Google Fonts calls, no network required, all licensed under SIL Open Font License or Apache 2.0 — products made with them can be sold.
+
+**Zoom that doesn't break the tools.** At any zoom level, brushes, path points, and crop frames land exactly where you click.
+
+**Bilingual with dark mode.** German/English at the click of a button, light and dark appearance.
+
+---
+
+## Try it right now
+
+**Locally.** Download [`Sticker Maker.html`](Sticker%20Maker.html) and double-click it. That's it — everything except AI subject detection works offline.
+
+**Online.** Place the same file on any web host, or enable GitHub Pages under *Settings → Pages* in the repository — `index.html` is the same app and will be served directly. Accessible via link from any device.
+
+**As an App.** Opened in browser: Chrome/Edge → "Install this page as an app". On mobile: Share → "Add to Home Screen". Custom icon, dedicated window, no app store account. (For iPhones, the page must be served over an `https` address.)
+
+---
+
+## Step by step
+
+### 1 · Load image
+
+Drag into the preview window, click to select, or paste from clipboard using `Cmd/Ctrl + V`.
+
+### 2 · Set shape — four ways
+
+The method is selected **before** loading so no image is accidentally processed by subject recognition.
+
+| Path | Purpose | How |
+| --- | --- | --- |
+| **Full-area** | Photos, memes, anything rectangular | Select format (Free · 1:1 · 4:5 · 3:4 · 16:9 · 9:16), drag frame, *Apply crop* → **Square** or **Rounded** with radius up to 100% (= pill or circle) |
+| **Path** | Complex subjects, total control | Click points, straight lines in between, shape closes automatically. Dragging a point adjusts it, clicking a line inserts a point, *Apply selection* |
+| **Detect subject** | People, products, animals | Background removal via a browser AI model, then fine-tune edge softness and edge offset |
+| **Pre-cut** | Ready-made PNGs with transparency | File alpha channel is adopted as-is — no recognition, no cropping |
+
+For "Detect subject" and "Pre-cut", a **Correction brush** is also available: erase or restore directly on the preview image.
+
+### 3 · Border
+
+On/off, then **White** (classic sticker border) or **Transparent** (clear foil). Border width 0–70 px, *Smooth outline* 0–100% for a die-cut silhouette instead of the exact subject outline. For transparent borders, **Milky** and **Dirty edge** options become available.
+
+### 4 · Used look
+
+Scratches, wear, or creases — procedurally generated, or upload a custom image mask (with a toggle to swap whether white or black represents scratches). Intensity, mask scale 0.2–3×, rotation, flip horizontally, center, **re-roll** — and dragging on the preview image repositions the mask.
+
+### 5 · Holo effect
+
+**Rainbow** overlays a broad pastel gradient across the surface. Optionally add:
+
+- **Shards** — angular broken-glass fragments, each in a flat color
+- **Glitter** — fine grain with individual variations, single grains flashing nearly white
+
+Plus size, **density up to 500%**, and *Random reflection*, which re-rolls the entire color field.
+
+### 6 · Text
+
+Ten fonts as a grid, each rendered in its own weight/style — or load a custom font file. Color as **White · Black · Color · Punch-out**; "Color" unlocks hue, saturation, and lightness, "Punch-out" cuts the text through the sticker. The outline selects its own color automatically: black behind white text, white behind black, and for custom colors, the same hue slightly louder — never a dull complementary color. Size, rotation, letter spacing, opacity; drag to position. **Age with sticker / On top** toggle.
+
+### 7 · Export
+
+PNG with transparency in **1× · 2× · Original resolution**.
+
+---
+
+## Canvas tools
+
+| | |
+| --- | --- |
+| **Zoom** | −/Value/+ · Clicking the value fits to screen · `Ctrl/Cmd` + Scroll zooms to pointer · Middle mouse button pans |
+| **Preview background** | Checkerboard · Dark · Light · Custom photo (shows sticker on laptop, bottle, notebook) |
+| **Language** | German / English |
+| **Appearance** | Light / Dark |
+
+---
+
+## Offline use
+
+Everything except AI subject detection works offline: cropping, shape selection, path tool, PNG alpha, brush, border, used look, holo, glitter, text, and export. Fonts are embedded in the file.
+
+The **AI detection** downloads its model once on first use (~45 MB, cached in browser thereafter). If offline, a fallback offline cutout triggers automatically, which can be touched up with the brush tool.
+
+---
+
+## Licenses
+
+**The code** is covered under Custom License usage rights. Please review `LICENSE`.
+
+**The ten fonts** are licensed under SIL Open Font License or Apache 2.0: products created with them may be sold; only reselling the font files themselves is prohibited.
+
+**The recognition model** ([RMBG 1.4](https://huggingface.co/briaai/RMBG-1.4) by BRIA AI) is **free for non-commercial use only**; commercial use requires an agreement with BRIA. This exclusively affects the "Detect subject" path — full-area, path, and pre-cut do not use a model and are unaffected. This is not legal advice.
