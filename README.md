@@ -143,7 +143,7 @@ sich mit dem Pinsel nachbessern lässt.
 
 ## Lizenzen
 
-**Der Code** steht unter MIT — siehe `LICENSE`.
+**Der Code** steht unter Custom License. Nutzungsrechte unter `LICENSE` beachten.
 
 **Die zehn Schriften** stehen unter SIL Open Font License oder Apache 2.0: mit den Ergebnissen
 darf verkauft werden, nur die Schriftdatei selbst nicht weiterverkauft.
