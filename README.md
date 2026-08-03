@@ -155,7 +155,7 @@ und Freigestellt nutzen kein Modell und sind davon unberührt. Dies ist keine Re
 
 ---
 
-## English
+# English Translation
 
 # Sticker Maker
 
