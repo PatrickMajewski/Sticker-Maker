@@ -1,3 +1,4 @@
+<img src="SM_apple.png" alt="SM Apple Logo" width="250">
 # Sticker Maker
 
 Aus einem Bild wird ein druckreifer Sticker als transparentes PNG — Freistellen, Rand,
