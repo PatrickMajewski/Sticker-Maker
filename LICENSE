@@ -1,33 +1,35 @@
-Copyright (c) 2026 Patrick Majewski
+MIT License
 
-All rights reserved.
+Copyright (c) 2026 <DEIN NAME>
 
-Permission is granted to download and use this software for personal, non-commercial purposes only.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-You may **not**, without prior written permission from the copyright holder:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-* redistribute this software or any part of it;
-* modify or create derivative works based on this software;
-* incorporate this software, its source code, or substantial parts of it into another project or product;
-* use this software commercially;
-* sell, sublicense, or otherwise distribute this software.
-
-If you would like to use AddHashtag in another project, distribute modified versions, or obtain a commercial license, please contact the author first.
-
-This software is provided "as is", without warranty of any kind, express or implied. The author shall not be liable for any claim, damages, or other liability arising from the use of this software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 ---
 
-## License & Third-Party Notices
+Diese Lizenz gilt für den Code des Sticker Makers.
 
-This license applies to the core code of the Sticker Maker.
+Nicht davon erfasst:
 
-### Exceptions & Third-Party Components
+- Die zehn eingebetteten Schriften in src/fonts.css stehen unter SIL Open Font License
+  bzw. Apache License 2.0. Produkte, die damit gestaltet werden, dürfen verkauft werden;
+  die Schriftdateien selbst dürfen nicht weiterverkauft werden.
 
-* **Embedded Fonts (`src/fonts.css`)**
-  * **Licenses:** [SIL Open Font License](https://scripts.sil.org/OFL) / [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
-  * **Terms:** Products created or designed using these fonts **may be sold**. The font files themselves **may not be resold**.
-
-* **RMBG 1.4 Background Removal Model (BRIA AI)**
-  * **Source:** Dynamically fetched at runtime via [Hugging Face](https://huggingface.co/briaai/RMBG-1.4) (not included in this repository).
-  * **Terms:** Free for **non-commercial use only**.
+- Das Erkennungsmodell RMBG 1.4 (BRIA AI) wird zur Laufzeit von Hugging Face geladen und ist
+  nicht Teil dieses Repositories. Es ist nur für nicht-kommerzielle Nutzung frei;
+  https://huggingface.co/briaai/RMBG-1.4

@@ -1,4 +1,3 @@
-<img src="SM_apple.png" alt="SM Apple Logo" width="250">
 # Sticker Maker
 
 Aus einem Bild wird ein druckreifer Sticker als transparentes PNG — Freistellen, Rand,
@@ -9,15 +8,25 @@ HTML-Datei, kein Konto, kein Upload, kein Server: die Bilder verlassen das Gerä
 
 ## Was diesen Maker besonders macht
 
+**Ein exakter Umriss, kein nachgezeichneter.** Der Rand entsteht aus einem echten Distanzfeld:
+für jeden Bildpunkt wird der Abstand zum Motiv berechnet, der Rand ist die Schwelle darauf. Bei
+5 px genauso rund wie bei 70 px, und die Kante ist ein Schnitt mit einem antialiasenden Pixel —
+kein Verlauf, der die Form aufweicht. „Kontur glätten" rundet nur noch die Linienführung aus,
+wenn du bewusst eine Die-Cut-Form statt der exakten Motivkontur willst.
+
 **Vier Wege zur Form — die Erkennung ist optional.** Die meisten Werkzeuge zwingen jedes Bild
 durch eine Motiverkennung. Hier ist sie einer von vier gleichberechtigten Wegen: vollflächig
 zuschneiden, Pfad von Hand klicken, Motiv erkennen lassen, oder ein fertig freigestelltes PNG
 unverändert übernehmen. Wer die Vorarbeit schon geleistet hat, braucht nur noch Rand und Effekte.
 
 **Der transparente Rand sieht aus wie transparente Folie.** „Transparent" heißt hier nicht
-„unsichtbar": *Milchig* gibt der Klarfläche den leichten Schleier echter Folie, die
-*Schmutzkante* setzt ungleichmäßigen Abrieb genau auf den äußersten Saum — dorthin, wo sich bei
-einem benutzten Sticker der Dreck sammelt.
+„unsichtbar": *Milchig* gibt der Klarfläche den leichten Schleier echter Folie.
+
+**Die Schmutzkante ist abgeplatzte Kante, kein Schleier.** Kein weichgezeichnetes Band nach
+innen, sondern unregelmäßige Ausbrüche direkt auf der Kontur: die meisten Stellen bleiben fast
+unberührt, einzelne Strecken sind tief hineingefressen, die Innenkante zerfranst in Krümel. Die
+**Tiefe ist ein eigener Regler** und hängt nicht an der Randbreite — der Dreck darf bewusst auf
+das Motiv laufen.
 
 **Die Gebrauchsspuren folgen der Randwahl.** Weißer Rand → weiße Kratzer. Transparenter Rand →
 echte Löcher durch die Folie. Kein aufgemalter Filter, sondern dieselbe physikalische Logik wie
@@ -41,6 +50,16 @@ Font License oder Apache 2.0 — mit den Ergebnissen darf verkauft werden.
 
 **Zoom, der die Werkzeuge nicht bricht.** Bei jeder Zoomstufe treffen Pinsel, Pfadpunkte und
 Zuschnittrahmen exakt dort, wo geklickt wird.
+
+**Ein stabilisierter Pinsel.** Die Spitze läuft dem Zeiger hinterher statt auf ihm zu sitzen:
+Handzittern wird herausgemittelt, eine gewollte Bewegung geht ungefiltert durch. Mit Maus wie
+mit dem Finger.
+
+**Dieselbe Datei auf Telefon und Rechner.** Hochformat, Querformat, Desktop — kein zweiter
+Build, keine App-Version. Auf dem Telefon: ein Finger arbeitet, zwei Finger zoomen und
+verschieben; im markierten Block skalieren und drehen sie stattdessen die Ebene. Die
+Bedienelemente sitzen als Kapseln in den Ecken der Arbeitsfläche und blenden aus, solange ein
+Finger auf dem Sticker liegt.
 
 **Zweisprachig und mit Dunkelmodus.** Deutsch/Englisch auf Knopfdruck, helles und dunkles
 Erscheinungsbild.
@@ -78,16 +97,24 @@ Der Weg wird **vor** dem Laden gewählt, damit kein Bild ungewollt durch die Erk
 | **Vollflächig** | Fotos, Memes, alles Rechteckige | Format wählen (frei · 1:1 · 4:5 · 3:4 · 16:9 · 9:16), Rahmen ziehen, *Zuschnitt übernehmen* → **Eckig** oder **Gerundet** mit Radius bis 100 % (= Pille bzw. Kreis) |
 | **Pfad** | schwierige Motive, volle Kontrolle | Punkte klicken, gerade Linien dazwischen, Form schließt selbst. Punkt ziehen justiert, Klick auf eine Linie setzt einen Punkt ein, *Auswahl übernehmen* |
 | **Motiv erkennen** | Personen, Produkte, Tiere | Freistellung durch ein KI-Modell im Browser, danach Kantenweichheit und Kanteneinzug feinjustieren |
+
+Bei den drei Wegen ohne Erkennung steht die Kantenweichheit auf 0 — eine gezeichnete oder
+mitgelieferte Kontur ist exakte Geometrie und braucht keine Glättung. Nur die Erkennung bekommt
+sie, weil ihre Maske rauscht.
 | **Freigestellt** | fertige PNGs mit Transparenz | der Alphakanal der Datei wird unverändert übernommen — keine Erkennung, kein Zuschnitt |
 
-Bei „Motiv erkennen" und „Freigestellt" gibt es zusätzlich den **Korrekturpinsel**: direkt im
-Vorschaubild radieren oder zurückholen.
+Bei „Motiv erkennen" und „Freigestellt" gibt es zusätzlich die **Feinkorrektur**: direkt im
+Vorschaubild radieren oder zurückholen, Pinselgröße 2–200 px. Während du korrigierst, liegt die
+**Originalgrafik blass im Hintergrund** — du siehst, wo das Motiv wirklich endet, statt zu raten.
+**Zurück** nimmt den letzten Strich weg, zehn Schritte weit. Der Knopf zeigt an, wie viele noch
+übrig sind.
 
 ### 3 · Rand
 
 An/aus, dann **Weiß** (klassischer Sticker-Rand) oder **Transparent** (Klarfolie).
 Randbreite 0–70 px, *Kontur glätten* 0–100 % für einen Die-Cut-Umriss statt der exakten
-Motivkontur. Bei transparentem Rand kommen **Milchig** und **Schmutzkante** dazu.
+Motivkontur. Bei transparentem Rand kommt **Milchig** dazu. **Schmutzkante** (Stärke und Tiefe)
+gibt es in beiden Modi.
 
 ### 4 · Used Look
 
@@ -116,7 +143,19 @@ Größe, Drehung, Laufweite, Deckkraft; Ziehen positioniert. Umschalter **Mit al
 
 ### 7 · Export
 
-PNG mit Transparenz in **1× · 2× · Originalauflösung**.
+Erst das **Format**, dann die **Größe**.
+
+**PNG** oder **WebP**, beide in 50 % · Original · 200 %, jeweils bezogen auf deine Ausgangsdatei —
+die tatsächliche Pixelgröße steht darunter. WebP ist bei gleicher Qualität rund ein Drittel
+kleiner als PNG und kann ebenfalls transparent sein.
+
+Unter WebP kommen zwei Voreinstellungen dazu: **512 × 512** erfüllt die Vorgaben von WhatsApp und
+Telegram (Transparenz, unter 100 KB, schmaler freier Rand — PNG wird dort nicht angenommen), und
+**96 × 96** ist das Titelbild eines ganzen Sticker-Pakets. Der Sticker wird dabei mittig in das
+Quadrat eingepasst, nicht beschnitten, und die Qualität so weit gesenkt, bis die Datei unter der
+Grenze liegt. Auf dem Telefon geht der Sticker über das
+Teilen-Menü direkt nach Fotos (dafür muss die Seite über `https` laufen), am Rechner als
+Download.
 
 ---
 
@@ -144,7 +183,7 @@ sich mit dem Pinsel nachbessern lässt.
 
 ## Lizenzen
 
-**Der Code** steht unter Custom License Nutzungsrechte. Diese unter `LICENSE` beachten.
+**Der Code** steht unter MIT — siehe `LICENSE`.
 
 **Die zehn Schriften** stehen unter SIL Open Font License oder Apache 2.0: mit den Ergebnissen
 darf verkauft werden, nur die Schriftdatei selbst nicht weiterverkauft.
@@ -156,115 +195,56 @@ und Freigestellt nutzen kein Modell und sind davon unberührt. Dies ist keine Re
 
 ---
 
-# English Translation
+## Technik in Kürze
 
-# Sticker Maker
+Reines HTML, CSS und JavaScript, kein Build-Schritt, keine Abhängigkeiten zur Laufzeit außer
+dem KI-Modell. Die Bildverarbeitung läuft auf 2D-Canvas.
 
-Turn an image into a print-ready sticker as a transparent PNG — background removal, border, wear & tear, holo finish, and text. **Runs entirely in your browser.** A single HTML file, no account, no upload, no server: images never leave your device.
+Der Kern ist **maskengetrieben**: alles hängt an einer einzigen Graustufen-Maske. Woher sie
+kommt — Erkennung, Pfad, Rechteck, PNG-Alpha oder Pinsel — ist allem Nachgelagerten egal. Rand,
+Gebrauchsspuren, Holo, Text und Export lesen nur diese Maske. Eine neue Formquelle liefert eine
+Maske und fasst die Pipeline nicht an.
 
----
-
-## What makes this maker special
-
-**Four ways to shape — subject detection is optional.** Most tools force every image through subject recognition. Here, it is just one of four equal paths: crop full-area, click a path by hand, detect subject automatically, or import a pre-cut PNG as-is. If you've already done the prep work, all you need are the border and effects.
-
-**The transparent border looks like real clear foil.** "Transparent" here doesn't mean "invisible": *Milky* gives the clear area the slight haze of real foil, while *Dirty edge* adds uneven wear precisely to the outermost seam — right where dirt collects on a used sticker.
-
-**Wear and tear follows your border choice.** White border → white scratches. Transparent border → real holes through the foil. Not a painted-on filter, but the same physical logic as an actual sticker.
-
-**A single rainbow field for everything.** The pastel gradient and the color of every single shard or grain of glitter come from the **same** color field — neighbors share hue, and a sweep visibly runs across the sticker. Two independent random effects side-by-side look wrong; this doesn't.
-
-**Gloss doesn't sit on scratches.** A scratch is worn-away foil — the gloss is gone there. And for glitter, the rainbow and colored grains only carry the print, while the white die-cut border carries the same grain pattern clearly and desaturated: clear glitter over the foil.
-
-**Text that ages with the sticker.** By default, text sits **underneath** wear & tear and glitter, so it wears down alongside the sticker — it's part of the print, not an overlay. For headlines, there's an "On top" toggle.
-
-**Ten embedded fonts.** No Google Fonts calls, no network required, all licensed under SIL Open Font License or Apache 2.0 — products made with them can be sold.
-
-**Zoom that doesn't break the tools.** At any zoom level, brushes, path points, and crop frames land exactly where you click.
-
-**Bilingual with dark mode.** German/English at the click of a button, light and dark appearance.
+Ausführlich in [`docs/HANDOFF.md`](docs/HANDOFF.md): Architektur, sämtliche Entscheidungen mit
+Begründung, bekannte Grenzen und der Weg zu einer mobilen Umsetzung.
 
 ---
 
-## Try it right now
+## Was liegt wo
 
-**Locally.** Download [`Sticker Maker.html`](Sticker%20Maker.html) and double-click it. That's it — everything except AI subject detection works offline.
-
-**Online.** Place the same file on any web host, or enable GitHub Pages under *Settings → Pages* in the repository — `index.html` is the same app and will be served directly. Accessible via link from any device.
-
-**As an App.** Opened in browser: Chrome/Edge → "Install this page as an app". On mobile: Share → "Add to Home Screen". Custom icon, dedicated window, no app store account. (For iPhones, the page must be served over an `https` address.)
-
----
-
-## Step by step
-
-### 1 · Load image
-
-Drag into the preview window, click to select, or paste from clipboard using `Cmd/Ctrl + V`.
-
-### 2 · Set shape — four ways
-
-The method is selected **before** loading so no image is accidentally processed by subject recognition.
-
-| Path | Purpose | How |
-| --- | --- | --- |
-| **Full-area** | Photos, memes, anything rectangular | Select format (Free · 1:1 · 4:5 · 3:4 · 16:9 · 9:16), drag frame, *Apply crop* → **Square** or **Rounded** with radius up to 100% (= pill or circle) |
-| **Path** | Complex subjects, total control | Click points, straight lines in between, shape closes automatically. Dragging a point adjusts it, clicking a line inserts a point, *Apply selection* |
-| **Detect subject** | People, products, animals | Background removal via a browser AI model, then fine-tune edge softness and edge offset |
-| **Pre-cut** | Ready-made PNGs with transparency | File alpha channel is adopted as-is — no recognition, no cropping |
-
-For "Detect subject" and "Pre-cut", a **Correction brush** is also available: erase or restore directly on the preview image.
-
-### 3 · Border
-
-On/off, then **White** (classic sticker border) or **Transparent** (clear foil). Border width 0–70 px, *Smooth outline* 0–100% for a die-cut silhouette instead of the exact subject outline. For transparent borders, **Milky** and **Dirty edge** options become available.
-
-### 4 · Used look
-
-Scratches, wear, or creases — procedurally generated, or upload a custom image mask (with a toggle to swap whether white or black represents scratches). Intensity, mask scale 0.2–3×, rotation, flip horizontally, center, **re-roll** — and dragging on the preview image repositions the mask.
-
-### 5 · Holo effect
-
-**Rainbow** overlays a broad pastel gradient across the surface. Optionally add:
-
-- **Shards** — angular broken-glass fragments, each in a flat color
-- **Glitter** — fine grain with individual variations, single grains flashing nearly white
-
-Plus size, **density up to 500%**, and *Random reflection*, which re-rolls the entire color field.
-
-### 6 · Text
-
-Ten fonts as a grid, each rendered in its own weight/style — or load a custom font file. Color as **White · Black · Color · Punch-out**; "Color" unlocks hue, saturation, and lightness, "Punch-out" cuts the text through the sticker. The outline selects its own color automatically: black behind white text, white behind black, and for custom colors, the same hue slightly louder — never a dull complementary color. Size, rotation, letter spacing, opacity; drag to position. **Age with sticker / On top** toggle.
-
-### 7 · Export
-
-PNG with transparency in **1× · 2× · Original resolution**.
-
----
-
-## Canvas tools
-
-| | |
+| Datei | Inhalt |
 | --- | --- |
-| **Zoom** | −/Value/+ · Clicking the value fits to screen · `Ctrl/Cmd` + Scroll zooms to pointer · Middle mouse button pans |
-| **Preview background** | Checkerboard · Dark · Light · Custom photo (shows sticker on laptop, bottle, notebook) |
-| **Language** | German / English |
-| **Appearance** | Light / Dark |
+| `Sticker Maker.html` | **die App** — eine Datei, alles enthalten, läuft per Doppelklick |
+| `index.html` | identische Kopie, damit GitHub Pages die App direkt ausliefert |
+| `src/Sticker Maker.dc.html` | der Quelltext, aus dem die Einzeldatei gebaut wird |
+| `src/fonts.css` | die zehn Schriften als eingebettete `data:`-WOFF2 |
+| `docs/HANDOFF.md` | vollständiges Protokoll: Quellen, Architektur, Entscheidungstabelle, bekannte Grenzen, Weg zur mobilen App |
+| `docs/Projektgedaechtnis.md` | Kurzfassung der verbindlichen Konventionen (im Arbeitsprojekt als `CLAUDE.md`) |
+| `docs/Fehlerbericht Playlist Designer.md` | zwei Dunkelmodus-Fehler in der Partner-App, mit Zeilenangaben und Lösung |
+| `LICENSE` | MIT für den Code, plus die Hinweise zu Schriften und Modell |
+
+**Vor dem ersten Push:** in `LICENSE` `<DEIN NAME>` ersetzen.
+
+`Sticker Maker.html` und `index.html` sind bewusst identisch und werden gemeinsam aus
+`src/` neu gebaut — wer eine ändert, muss beide ersetzen.
 
 ---
 
-## Offline use
+## English
 
-Everything except AI subject detection works offline: cropping, shape selection, path tool, PNG alpha, brush, border, used look, holo, glitter, text, and export. Fonts are embedded in the file.
+Turns any image into a print-ready sticker as a transparent PNG — cut-out, border, wear, holo
+finish and text. **Runs entirely in your browser**, as a single HTML file: no account, no
+upload, no server, images never leave the device. The interface switches between German and
+English, and has a dark mode.
 
-The **AI detection** downloads its model once on first use (~45 MB, cached in browser thereafter). If offline, a fallback offline cutout triggers automatically, which can be touched up with the brush tool.
+Four independent ways to get a shape: crop a full-bleed rectangle, click a path by hand, let an
+in-browser AI model detect the subject, or take the alpha channel of an already cut-out PNG
+as-is. The transparent border behaves like real clear vinyl (milky haze, grime collecting at the
+outer edge), wear follows the border choice (white scratches vs. real holes), rainbow wash and
+every single flake or glitter grain take their colour from one shared colour field, gloss never
+sits on a scratch, and text ages along with the sticker unless you flip it on top.
 
----
-
-## Licenses
-
-**The code** is covered under Custom License usage rights. Please review `LICENSE`.
-
-**The ten fonts** are licensed under SIL Open Font License or Apache 2.0: products created with them may be sold; only reselling the font files themselves is prohibited.
-
-**The recognition model** ([RMBG 1.4](https://huggingface.co/briaai/RMBG-1.4) by BRIA AI) is **free for non-commercial use only**; commercial use requires an agreement with BRIA. This exclusively affects the "Detect subject" path — full-area, path, and pre-cut do not use a model and are unaffected. This is not legal advice.
+Download `Sticker Maker.html` and open it — everything except AI detection works offline.
+Model licence note above applies: RMBG 1.4 is non-commercial only; the other three modes use no
+model at all. Full engineering notes, decision log and known limits are in
+[`docs/HANDOFF.md`](docs/HANDOFF.md) (German).
